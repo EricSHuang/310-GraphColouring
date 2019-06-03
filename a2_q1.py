@@ -41,7 +41,8 @@ def contains(arr, x):
     return False
 
 
-
+"""
 #testing
 graph = rand_graph(5, 0.5)
 print(graph)
+"""

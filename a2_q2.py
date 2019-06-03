@@ -10,29 +10,26 @@ def check_teams(graph, csp_sol):
         return False
 
     #Check that connected nodes aren't in the same group
-
-    #this section seems unnecessary
     groups = {}
     #Assign nodes to their respective group
     for node, group in csp_sol.items():
-        #hold = groups[group]
-        #hold.append(node)
-        #groups[group] = hold
-        #groups[group].append(node)
-        groups[group] = node
+        if group in groups:     #Checks if the group already exists
+            hold = groups[group]
+            hold.append(node)
+            groups[group] = hold
+        else:
+            groups[group] = [node]
+    #print(groups)
 
-    print(groups)
-    return True
-"""
     for group in groups:
         currGroup = groups[group]
+        #print(currGroup)
         for i in range(0, len(currGroup)):
-            connections = graph[currGroup[i]]
+            connections = graph[currGroup[i]]   #i-th node's friends
             for j in range(0, len(currGroup)):
-                if (contains(connections, j)):
+                if (contains(connections, currGroup[j])):
                     return False
-"""
-
+    return True
 
 
 
@@ -59,4 +56,4 @@ ans3 = {0:0, 1:1, 2:2, 3:3}
 g4 = {0: [], 1: [], 2: []}
 ans4 = {0:0, 1:0, 2:0}
 
-print(check_teams(g1, ans1))
+print(check_teams(g2, wrongAns2))

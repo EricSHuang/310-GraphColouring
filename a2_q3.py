@@ -41,50 +41,49 @@ def run_q3():
                 #csp = MapColoringCSP(d2, neighbors)
                 #print(csp.variables)
                 #print("neighbors: ", csp.neighbors)
-                print("pre ac3: ", csp.domains)
+                #print("pre ac3: ", csp.domains)
                 #print("constraints: ", csp.constraints)
                 consistent = AC3(csp)
                 if (consistent):
-                    print("GRAPH %d IS CONSISTENT" %(j))
-                    break;
-                #print("post ac3: ", csp.domains)
+                    print("GRAPH %d IS CONSISTENT WITH DOMAIN[0, %d]" %(((j * 1) + 0.1), k))
+                    #print("post ac3: ", csp.domains)
 
 
-                ans = backtracking_search(csp)
-                if (ans != None):
-                    """ANSWER AND REPORTS"""
-                    #print(ans)
-                    print("-----Probability %0.1f Graph -----" %((j * 0.1) + 0.1))
+                    ans = backtracking_search(csp, mrv, lcv, forward_checking)
+                    if (ans != None):
+                        """ANSWER AND REPORTS"""
+                        #print(ans)
+                        print("-----Probability %0.1f Graph -----" %((j * 0.1) + 0.1))
 
-                    #Running Time
-                    elapsedTime = time.time() - startTime
-                    print("Running Time: %f seconds" %(elapsedTime))
+                        #Running Time
+                        elapsedTime = time.time() - startTime
+                        print("Running Time: %f seconds" %(elapsedTime))
 
-                    #Number of Teams
-                    numTeams = 0
-                    teams = []
-                    for l in range(0, len(ans)):
-                        if (not contains(teams, ans[l])):
-                            teams.append(ans[l])
-                            numTeams += 1
-                    print("Number of Teams: ", numTeams)
+                        #Number of Teams
+                        numTeams = 0
+                        teams = []
+                        for l in range(0, len(ans)):
+                            if (not contains(teams, ans[l])):
+                                teams.append(ans[l])
+                                numTeams += 1
+                        print("Number of Teams: ", numTeams)
 
-                    #Number of Times CSP variables were assigned and unassigned
-                    numAssigned = csp.nassigns
-                    numUnassigned = len(currGraph) - numAssigned
-                    #every superfluous assignment means that a var was unassigned
-                    print("Assignments: %d, Unassignments: %d" %(numAssigned, numUnassigned))
+                        #Number of Times CSP variables were assigned and unassigned
+                        numAssigned = csp.nassigns
+                        numUnassigned = numAssigned - len(currGraph)
+                        #every superfluous assignment means that a var was unassigned
+                        print("Assignments: %d, Unassignments: %d" %(numAssigned, numUnassigned))
 
-                    #Number of Edges in the Graph (Extra)
-                    numEdges = 0
-                    for l in range(0, len(currGraph)):
-                        numEdges += len(currGraph[l])
-                    numEdges = int(numEdges / 2)
-                    print("Number of Connections: ", numEdges)
+                        #Number of Edges in the Graph (Extra)
+                        numEdges = 0
+                        for l in range(0, len(currGraph)):
+                            numEdges += len(currGraph[l])
+                        numEdges = int(numEdges / 2)
+                        print("Number of Connections: ", numEdges)
 
-                    #Graph analysis complete (new line for readability)
-                    print("\n")
-                    break;
+                        #Graph analysis complete (new line for readability)
+                        print("\n")
+                        break;
 
         print("\n") #round ended (new-line for readability)
 

@@ -23,65 +23,68 @@ def run_q3():
             #print(currGraph)
 
             """---SETTING UP THE CSP---"""
-            variables = []
-            for node in currGraph:
-                variables.append(node)
-
-            domains = {}
-            #each node could be in any group from 0 to numVars-1
             for k in range(0, len(currGraph)):
-                #domains[k] = list(range(0, len(currGraph)))
-                domains[k] = list(range(0, 1))
-            d2 = [0,1]
+                variables = []
+                for node in currGraph:
+                    variables.append(node)
 
-            neighbors = currGraph
-            constraint = different_values_constraint
+                domains = {}
+                #each node could be in any group from 0 to numVars-1
+                for l in range(0, len(currGraph)):
+                    #domains[l] = list(range(0, len(currGraph)))
+                    domains[l] = list(range(0, k))
 
-            csp = CSP(variables, domains, neighbors, constraint)
-            #csp = MapColoringCSP(d2, neighbors)
-            #print(csp.variables)
-            #print("neighbors: ", csp.neighbors)
-            print("pre ac3: ", csp.domains)
-            #print("constraints: ", csp.constraints)
-            consistent = AC3(csp)
-            if (not consistent):
-                print("GRAPH %d WAS NOT CONSISTENT" %(j))
-                break;
-            print("post ac3: ", csp.domains)
+                neighbors = currGraph
+                constraint = different_values_constraint
 
-            """ANSWER AND REPORTS"""
-            ans = backtracking_search(csp)
-            print(ans)
-            print("-----Probability %0.1f Graph -----" %((j * 0.1) + 0.1))
+                csp = CSP(variables, domains, neighbors, constraint)
+                #csp = MapColoringCSP(d2, neighbors)
+                #print(csp.variables)
+                #print("neighbors: ", csp.neighbors)
+                print("pre ac3: ", csp.domains)
+                #print("constraints: ", csp.constraints)
+                consistent = AC3(csp)
+                if (consistent):
+                    print("GRAPH %d IS CONSISTENT" %(j))
+                    break;
+                #print("post ac3: ", csp.domains)
 
-            #Running Time
-            elapsedTime = time.time() - startTime
-            print("Running Time: %f seconds" %(elapsedTime))
 
-            #Number of Teams
-            numTeams = 0
-            teams = []
-            for k in range(0, len(ans)):
-                if (not contains(teams, ans[k])):
-                    teams.append(ans[k])
-                    numTeams += 1
-            print("Number of Teams: ", numTeams)
+                ans = backtracking_search(csp)
+                if (ans != None):
+                    """ANSWER AND REPORTS"""
+                    #print(ans)
+                    print("-----Probability %0.1f Graph -----" %((j * 0.1) + 0.1))
 
-            #Number of Times CSP variables were assigned and unassigned
-            numAssigned = csp.nassigns
-            numUnassigned = len(currGraph) - numAssigned
-            #every superfluous assignment means that a var was unassigned
-            print("Assignments: %d, Unassignments: %d" %(numAssigned, numUnassigned))
+                    #Running Time
+                    elapsedTime = time.time() - startTime
+                    print("Running Time: %f seconds" %(elapsedTime))
 
-            #Number of Edges in the Graph (Extra)
-            numEdges = 0
-            for k in range(0, len(currGraph)):
-                numEdges += len(currGraph[k])
-            numEdges = int(numEdges / 2)
-            print("Number of Connections: ", numEdges)
+                    #Number of Teams
+                    numTeams = 0
+                    teams = []
+                    for l in range(0, len(ans)):
+                        if (not contains(teams, ans[l])):
+                            teams.append(ans[l])
+                            numTeams += 1
+                    print("Number of Teams: ", numTeams)
 
-            #Graph analysis complete (new line for readability)
-            print("\n")
+                    #Number of Times CSP variables were assigned and unassigned
+                    numAssigned = csp.nassigns
+                    numUnassigned = len(currGraph) - numAssigned
+                    #every superfluous assignment means that a var was unassigned
+                    print("Assignments: %d, Unassignments: %d" %(numAssigned, numUnassigned))
+
+                    #Number of Edges in the Graph (Extra)
+                    numEdges = 0
+                    for l in range(0, len(currGraph)):
+                        numEdges += len(currGraph[l])
+                    numEdges = int(numEdges / 2)
+                    print("Number of Connections: ", numEdges)
+
+                    #Graph analysis complete (new line for readability)
+                    print("\n")
+                    break;
 
         print("\n") #round ended (new-line for readability)
 

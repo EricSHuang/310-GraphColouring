@@ -8,8 +8,8 @@ import time
 
 
 def run_q3():
-    graphs = [rand_graph(30, 0.1), rand_graph(30, 0.2), rand_graph(30, 0.3),
-              rand_graph(30, 0.4), rand_graph(30, 0.5)]
+    graphs = [rand_graph(100, 0.1), rand_graph(100, 0.2), rand_graph(100, 0.3),
+              rand_graph(100, 0.4), rand_graph(100, 0.5)]
     #graphs = [{0: [1, 2], 1: [0], 2: [0], 3: []}]    #test graph
 
     numRounds = 1     #set to 5
@@ -23,7 +23,7 @@ def run_q3():
             #print(currGraph)
 
             """---SETTING UP THE CSP---"""
-            for k in range(0, len(currGraph)):
+            for k in range(1, len(currGraph)):
                 variables = []
                 for node in currGraph:
                     variables.append(node)
@@ -43,13 +43,15 @@ def run_q3():
                 #print("neighbors: ", csp.neighbors)
                 #print("pre ac3: ", csp.domains)
                 #print("constraints: ", csp.constraints)
+                
                 consistent = AC3(csp)
+                #consistent = True
                 if (consistent):
-                    print("GRAPH %d IS CONSISTENT WITH DOMAIN[0, %d]" %(((j * 1) + 0.1), k))
+                    print("GRAPH %0.1f IS CONSISTENT WITH DOMAIN[0, %d]" %(((j * 0.1) + 0.1), k))
                     #print("post ac3: ", csp.domains)
 
 
-                    ans = backtracking_search(csp, mrv, lcv, forward_checking)
+                    ans = min_conflicts(csp, 1000)
                     if (ans != None):
                         """ANSWER AND REPORTS"""
                         #print(ans)

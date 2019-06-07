@@ -8,8 +8,8 @@ Using the Ice Breaker Problem analogy, we are assigning people into groups where
 no one is prior friends with anyone else on their team.
 
 ## Files
-**a2_q1.py** creates random graphs with n nodes numbered 0 to n-1
-where every pair of nodes is connected with a probability p. <br>
+**a2_q1.py** creates random graphs with *n* nodes numbered *0 to n-1*
+where every pair of nodes is connected with a probability *p*. <br>
 **a2_q2.py** checks if given solutions satisfy all the constraints. In other words,
 every node is assigned a team, and no nodes in a team are connected. <br>
 **a2_q3.py** finds the exact solution to the problem using *back tracking search*.

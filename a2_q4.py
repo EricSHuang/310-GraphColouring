@@ -7,12 +7,15 @@ from a2_q1 import *
 import time
 
 
-def run_q3():
+def run_q4():
+    """Uses the min_conflicts algorithm to find an approximate solution.
+    min_conflicts runs faster than backtracking_search so it could be used on larger n"""
+    
     graphs = [rand_graph(100, 0.1), rand_graph(100, 0.2), rand_graph(100, 0.3),
               rand_graph(100, 0.4), rand_graph(100, 0.5)]
     #graphs = [{0: [1, 2], 1: [0], 2: [0], 3: []}]    #test graph
 
-    numRounds = 1     #set to 5
+    numRounds = 5     #set to 5
     for i in range(0, numRounds):
         print("------------------")
         print("*****Round %d*****" %(i+1))
@@ -43,11 +46,11 @@ def run_q3():
                 #print("neighbors: ", csp.neighbors)
                 #print("pre ac3: ", csp.domains)
                 #print("constraints: ", csp.constraints)
-                
+
                 consistent = AC3(csp)
                 #consistent = True
                 if (consistent):
-                    print("GRAPH %0.1f IS CONSISTENT WITH DOMAIN[0, %d]" %(((j * 0.1) + 0.1), k))
+                    #print("GRAPH %0.1f IS CONSISTENT WITH DOMAIN[0, %d]" %(((j * 0.1) + 0.1), k))
                     #print("post ac3: ", csp.domains)
 
 
@@ -72,8 +75,8 @@ def run_q3():
 
                         #Number of Times CSP variables were assigned and unassigned
                         numAssigned = csp.nassigns
-                        numUnassigned = numAssigned - len(currGraph)
-                        #every superfluous assignment means that a var was unassigned
+                        numUnassigned = 0
+                        #min_conflicts does not unassign vars, just reassigns them
                         print("Assignments: %d, Unassignments: %d" %(numAssigned, numUnassigned))
 
                         #Number of Edges in the Graph (Extra)
@@ -90,4 +93,4 @@ def run_q3():
         print("\n") #round ended (new-line for readability)
 
 
-run_q3()
+run_q4()

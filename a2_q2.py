@@ -4,7 +4,11 @@ Eric Huang
 """
 from csp import *
 
+
 def check_teams(graph, csp_sol):
+    """Returns True if csp solution dictionary 'csp_sol' satisfies all the
+    constraints in the friendship graph, and False otherwise."""
+
     #Not all nodes assigned to a group
     if (len(graph) != len(csp_sol)):
         return False
@@ -33,8 +37,8 @@ def check_teams(graph, csp_sol):
 
 
 
-#Returns true if array 'arr' contains element 'x'
 def contains(arr, x):
+"""Returns true if array 'arr' contains element 'x'"""
     for element in arr:
         if (element == x):
             return True
@@ -56,4 +60,4 @@ ans3 = {0:0, 1:1, 2:2, 3:3}
 g4 = {0: [], 1: [], 2: []}
 ans4 = {0:0, 1:0, 2:0}
 
-print(check_teams(g2, wrongAns2))
+#print(check_teams(g2, wrongAns2))

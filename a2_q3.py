@@ -8,11 +8,14 @@ import time
 
 
 def run_q3():
+    """Uses backtracking_search to provides exact solutions to the random graphs
+    created."""
+
     graphs = [rand_graph(30, 0.1), rand_graph(30, 0.2), rand_graph(30, 0.3),
               rand_graph(30, 0.4), rand_graph(30, 0.5)]
     #graphs = [{0: [1, 2], 1: [0], 2: [0], 3: []}]    #test graph
 
-    numRounds = 1     #set to 5
+    numRounds = 5     #set to 5
     for i in range(0, numRounds):
         print("------------------")
         print("*****Round %d*****" %(i+1))
@@ -45,7 +48,7 @@ def run_q3():
                 #print("constraints: ", csp.constraints)
                 consistent = AC3(csp)
                 if (consistent):
-                    print("GRAPH %d IS CONSISTENT WITH DOMAIN[0, %d]" %(((j * 1) + 0.1), k))
+                    #print("GRAPH %d IS CONSISTENT WITH DOMAIN[0, %d]" %(((j * 1) + 0.1), k))
                     #print("post ac3: ", csp.domains)
 
 
